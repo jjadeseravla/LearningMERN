@@ -6,7 +6,7 @@ const Item = require('../../models/Item');
 
 //create routes
 
-//@route GET to api/ItemSchema
+//@route GET to api/items
 //@description Get all ItemSchema
 //@access Public
 
@@ -16,8 +16,8 @@ router.get('/', (req, res) => {
     .then(items => res.json(items))
 });
 
-//@route POST to api/ItemSchema
-//@description Create a post
+//@route POST to api/items
+//@description Create an item
 //@access Public
 
 router.post('/', (req, res) => {
@@ -26,5 +26,18 @@ router.post('/', (req, res) => {
   });
     newItem.save().then(item => res.json(item));
   });
+
+  //@route DELETE to api/items/:id
+  //@description Delete an item
+  //@access Public
+
+  router.delete('/:id', (req, res) => {
+    Item.findById(req.params.id) //fetch id from the URI
+      .then(item => item.remove().then(() => res.json({ success: true }))
+    )
+    .catch(err => res.status(404).json({ success: false}));
+  })
+
+
 
 module.exports = router;
