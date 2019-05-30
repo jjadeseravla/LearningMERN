@@ -16,4 +16,15 @@ router.get('/', (req, res) => {
     .then(items => res.json(items))
 });
 
+//@route POST to api/ItemSchema
+//@description Create a post
+//@access Public
+
+router.post('/', (req, res) => {
+  const newItem = new Item({
+    name: req.body.name
+  });
+    newItem.save().then(item => res.json(item));
+  });
+
 module.exports = router;
