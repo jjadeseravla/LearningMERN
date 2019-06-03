@@ -12,4 +12,10 @@ export const deleteItem = (id) => {
     type: DELETE_ITEM,
     payload: id
   };
+
+  export const addItem = (item) => {
+    return {
+      type: ADD_ITEM,
+      payload: item
+    };
 };
